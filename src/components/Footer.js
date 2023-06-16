@@ -1,7 +1,10 @@
+import React from 'react'
+import pic from '../assets/Logo.png';
+
 function Footer(){
     return(
         <footer>
-            <img src="src\assets\Logo .svg"></img>
+            <img src={pic} alt=''></img>
             
         </footer>
     );

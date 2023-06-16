@@ -1,7 +1,9 @@
+import React from 'react'
+import pic from '../assets/Logo.png';
 function Header(){
     return(
         <header>
-            <img src="src\assets\Logo .svg"></img>
+            <img src={pic} alt=''></img>
         </header>
     );
 }
