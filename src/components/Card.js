@@ -1,12 +1,21 @@
 import React from 'react';
-import
+
 function Card(props) {
     return (
         <>
-            <img></img>
-            <h5></h5>
-            <p></p>
-            <h5></h5>
+            <img src={props.image} alt="dishes" width={'200px'} height={'133px'}></img>
+            <div>
+                <span>
+                    <h5>{props.name}</h5>
+                    <h5>{props.price}</h5>
+                </span>
+
+                <p>
+                    {props.description}
+                </p>
+                <h5>Order at delivery</h5>
+            </div>
+
         </>
 
 
