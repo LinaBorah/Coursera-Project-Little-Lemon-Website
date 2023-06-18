@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+header{
+  position: fixed;
+  background-color: white;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul.navbar-list{
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6,max-content);
+  gap: 15px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul.navbar-list>li>a{
+  text-decoration: none;
+  color: black;
+  font-weight:540;
+  font-family: 'Karla';
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+Header{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap:1.5rem;
+  padding:0.5rem;
+  width:100%;
+  min-width: 750px;
+  
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+.Hero{
+  max-height: 50vh;
+  padding-top: 30px;
+  background-color: #495E57;
+  display: grid;
+  grid-template-columns: 50% auto;
+  justify-content: center;
+}
+.Hero >div {
+  padding-top: 50px;
+}
+.Hero-image > img{
+  border-radius: 16px;
+  
+}
+.Hero>div>p{
+  padding-top: 20px;
+}
+button{
+  margin-top: 30px;
+  width: 10rem;
+  height: 2rem;
+  border-radius: 12px;
+  border-color: none;
+  border-style: none;
+  background-color: #F4CE14;
+  
+  font-weight: bold;
+}
+.Hero>div>h1{
+  color: #F4CE14;
+}
+.Hero>div>h2,p{
+  color:white;
+  padding-right: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.Specials{
+  min-height: 50vh;
+}
+footer{
+  display: grid;
+  grid-template-columns: repeat(4,max-content);
+  justify-content: center;
 }
