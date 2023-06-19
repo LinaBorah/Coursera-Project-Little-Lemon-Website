@@ -1,3 +1,14 @@
+body{
+  display:grid;
+  grid-template-rows: 60px 500px 100px;
+}
+
+button:hover{
+  background-color: orange;
+  cursor: pointer;
+  transition: background 0.1s linear;
+}
+
 header{
   position: fixed;
   background-color: white;
@@ -29,13 +40,17 @@ Header{
 
 main{
   display: grid;
-  grid-template-rows: repeat(4,min-content);
+  grid-template-rows: repeat(4,90vh);
   gap:5%
 }
-
-
-.Hero{
-   max-height: 60vh; 
+p{
+  font-size: larger;
+}
+h1,h2{
+  font-size: 3rem;
+}
+.Hero, .About{
+   max-height: 100vh; 
   /* padding-top: 30px; */
   background-color: #495E57;
   display: grid;
@@ -44,11 +59,12 @@ main{
   align-items: center;
 }
 .Hero >div {
-  padding-top: 50px;
+  /* padding-top: 50px; */
 }
-.Hero-image > img{
+.Hero-image > img, .About>div:nth-child(2)>img{
+  
   border-radius: 16px;
-  margin-top: 10%;
+  margin-top: 20%;
   
 }
 .Hero>div>p{
@@ -151,18 +167,19 @@ button{
   padding-top: 10%;
 }
 
-.About{
-  min-height: 60vh;
+/* .About{
+  max-height: 60vh;
   background-color: #495E57;
   color: white;
   display:grid;
   grid-template-columns: 50% auto;
   justify-content: center;
   align-items: center;
-}
+} */
 .About>div>p{
   padding-right: 20%;
   padding-top: 3%;
+  color: white;
 }
 .About>div>h1,.About>div>h2{
   color: yellow;
