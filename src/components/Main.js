@@ -67,8 +67,8 @@ function Main(){
                     </p>
                 </div>
                 <div>
-                    <img src={about1} alt="Owners" height= '280px' width="180px"></img>
-                    <img src={about2} alt="Owners" height= '280px' width="180px"></img>
+                    <img src={about1} alt="Owners" height= '250px' width="180px"></img>
+                    <img src={about2} alt="Owners" height= '250px' width="180px"></img>
                 </div>
             </section>
         </main>
