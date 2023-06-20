@@ -58,9 +58,7 @@ h1,h2{
   justify-content: center;
   align-items: center;
 }
-.Hero >div {
-  /* padding-top: 50px; */
-}
+
 .Hero-image > img, .About>div:nth-child(2)>img{
   
   border-radius: 16px;

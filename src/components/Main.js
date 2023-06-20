@@ -1,28 +1,17 @@
 
-
-import ReviewCard from './ReviewCard';
+import Home from './Home';
+import BookingPage from './BookingPage';
+import About from './About';
+import { Route, Routes } from 'react-router-dom';
 
 function Main() {
-
-
     return (
         <main>
-
-            
-
-            <section className="Testimonials">
-                <div>
-                    <h1>Testimonials</h1>
-                </div>
-                <div>
-                    <ReviewCard rating="4" name="Nita" review="Sit nisi exercitation nisi duis velit aliqua quis do qui." />
-                    <ReviewCard rating="5" name="Georgia" review="Sit nisi exercitation nisi duis velit aliqua quis do qui." />
-                    <ReviewCard rating="4.5" name="Mohini" review="Sit nisi exercitation nisi duis velit aliqua quis do qui." />
-                    <ReviewCard rating="4" name="Sanjay" review="Sit nisi exercitation nisi duis velit aliqua quis do qui." />
-                </div>
-
-            </section>
-
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/reservations" element={<BookingPage />} />
+      </Routes>
         </main>
     );
 }
