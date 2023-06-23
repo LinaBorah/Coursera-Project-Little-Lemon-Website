@@ -1,33 +1,68 @@
-
-export default function BookingForm(props) {
-    
-   
-
+//import { useState } from "react";
+export default function BookingForm({
+    date,
+    checkDate,
+    validateDate,
+    dateError,
+    avalaibleTimes,
+    Time,
+    updateTimes,
+    numberOfGuest, 
+    updateGuest,
+    selectRef,
+    handleSubmit
+}) {
+    // const[disable, setDisable] = useState("true");
+    var disable = true;
     return (
         <>
-            <form onSubmit={props.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="date">Choose Date</label>
                     <input
+                        required
                         type="date"
                         id="date"
                         name="booking-date"
-                        value={props.date}
-                        onChange={(e) => props.setDate(e.target.value)} />
+                        min={new Date().toISOString().slice(0,10)}
+                        value={date}
+                        //onFocus={resetField}
+                        onChange={checkDate}
+                        onBlur={validateDate}/>
+                        {
+                            dateError && (<p className="Error">Invalid Date, please choose a date after today!</p>)
+                            
+                        }
+                        {
+                            console.log(dateError)
+                        }
                 </div>
                 <div>
                     <label htmlFor="time">Choose Time</label>
 
-                    <select id="time "
+                    <select 
+                    disabled = {dateError}
+                        id="time "
                         name="booking-time"
-                        value={props.avalaibleTimes}
-                        onChange={(e) => props.setAvailableTimes(e.target.value)}>
-                        <option>17:00</option>
-                        <option>18:00</option>
-                        <option>19:00</option>
-                        <option>20:00</option>
-                        <option>21:00</option>
-                        <option>22:00</option>
+                        value={Time}
+                        onChange={updateTimes}
+                        required
+                        >
+                            <option
+                                disabled
+                                value="">
+                                -- : --
+                            </option>
+                        {
+                            avalaibleTimes.map((time,index)=>(
+                                <option
+                                    key={index}
+                                    value={time}>
+                                        {time}
+                                </option>
+                            ))
+                        }
+                        
                     </select>
                 </div>
                 <div>
@@ -39,22 +74,61 @@ export default function BookingForm(props) {
                         placeholder="1"
                         min={1}
                         max={10}
-                        value={props.numberOfGuest}
-                        onChange={(e) => props.setNumberOfGuest(e.target.value)}
-
+                        value={numberOfGuest}
+                        onChange={updateGuest}
+                        disabled={dateError}
+                        required
                     />
                 </div>
                 <div>
                     <label htmlFor="occasion">Occassion
-                        <select id="occasion" name="occasion">
-                            <option>Birthday</option>
-                            <option>Anniversary</option>
-                            <option>Others</option>
+                        <select id="occasion" name="occasion" defaultValue=""  ref = {selectRef} disabled={dateError} >
+                            { <option
+                                disabled
+                                value="">
+                                -- : --
+                            </option> }
+                            <option value="Birthday">Birthday</option>
+                            <option value="Anniversary">Anniversary</option>
+                            <option value="Other">Other..</option>
                         </select>
                     </label>
                 </div>
-                <button type="submit" value="Make your reservation" ></button>
+                {
+                    date.length > 0 && Time.length>0 && numberOfGuest > 0 ? disable=false : disable 
+                }
+                <button 
+                type="submit" 
+                value="Make your reservation" 
+                disabled={disable || dateError}
+                >Reserve a Table</button>
             </form>
         </>
     );
 }
+
+
+// This block is for testing purpose
+//export default function BookingForm({
+//     chooseDate,
+//     checkDate}
+//     ){
+   
+//     return(
+//         <>
+//             <form>
+//             <label htmlFor="date">Date</label>
+//           <input
+//             required
+//             id="date"
+//             name="date"
+//             type="date"
+//             min={new Date().toISOString().slice(0, 10)}
+//             value={chooseDate}
+//             onChange={checkDate}
+//           />
+//           {console.log(`date value is ${chooseDate}`)}
+//             </form>
+//         </>
+//     )
+// }

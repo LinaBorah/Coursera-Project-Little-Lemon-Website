@@ -3,7 +3,6 @@ import Home from './Home';
 import BookingPage from './BookingPage';
 import About from './About';
 import { Route, Routes } from 'react-router-dom';
-
 function Main() {
     return (
         <main>
@@ -11,7 +10,9 @@ function Main() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/reservations" element={<BookingPage />} />
-      </Routes>
+                <Route path="/reservations" element={<button id='reserve'/>} />
+
+            </Routes>
         </main>
     );
 }

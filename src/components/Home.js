@@ -4,6 +4,7 @@ import dish2 from '../assets/greek salad.jpg'
 import dish3 from '../assets/lemon dessert.jpg'
 import Card from './Card';
 import ReviewCard from './ReviewCard';
+import { Link } from 'react-router-dom';
 
 function Home() {
     const description1 = `Pariatur nisi et esse reprehenderit 
@@ -24,7 +25,7 @@ function Home() {
                         do proident id aliqua fugiat nostrud labore.
                         Occaecat consequat occaecat excepteur enim adipisicing.
                     </p>
-                    <button>Reserve a table</button>
+                    <Link to="/reservations"><button id='reserve'>Reserve a table</button></Link>
                 </div>
                 <div className='Hero-image'>
                     <img src={dish} alt='Main Dish' width={"350px"} height={'470px'}></img>
