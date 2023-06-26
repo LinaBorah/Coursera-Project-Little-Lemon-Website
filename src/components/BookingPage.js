@@ -1,85 +1,123 @@
-import BookingForm from "./BookingForm"
-import { useState, useRef } from "react";
+//import BookingForm from "./BookingForm"
+//import { useReducer } from "react";
+//import { Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+export default function BookingPage({
+    availableTimes,
+    date,
+    dateError,
+    numberOfGuest,
+    Time,
+    dispatch,
+    selectRef,
+    checkDate,
+    validateDate,
+    selectedTime,
+    updateGuest,
+    handleSubmit
+}) {
 
-export default function BookingPage(){
-    const avalaibleTimes = [
-        '17:00',
-        '18:00',
-        '19:00',
-        '20:00',
-        '21:00',
-        '22:00',
-    ]
-    const [date, setDate] = useState("");
-    const [dateError, setDateError] = useState(false);
-    const [numberOfGuest, setNumberOfGuest] = useState(0);
-    const [Time, setTime] = useState("")
-    const selectRef = useRef(null);
-    
-    const checkDate=(e)=>{
-        
-        setDate(e.target.value);
-        setDateError(false);
-    }
-    const validateDate=()=>{
-        
-        if(new Date(date)< new Date() || !new Date(date)){
-            setDateError(true);
-         }
-    }
-    
-    const updateTime =(e)=>{
-        setTime(e.target.value);
-        
-    }
-    const isSelected =(avalaibleTimes)=>{
-        return avalaibleTimes !== Time;
-    }
-    const filteredTime = ()=>{
-        const changedTimings = avalaibleTimes.filter(isSelected);
-        return changedTimings;
-    }
-    const updateGuest = (e)=>{
-        setNumberOfGuest(e.target.value);
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        filteredTime();
-        setDate("");
-        setTime("");
-        setNumberOfGuest(0);
-        selectRef.current.value = "";
-
-    }
-    return(
+    var disable = true;
+    return (
         <>
-            <BookingForm 
-            date={date} 
-            checkDate={checkDate}
-            validateDate={validateDate}
-            dateError={dateError}
-            avalaibleTimes={avalaibleTimes}
-            Time = {Time}
-            updateTimes={updateTime}
-            numberOfGuest={numberOfGuest} 
-            updateGuest = {updateGuest}
-            selectRef = {selectRef}
-            handleSubmit={handleSubmit}
-            />
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="date">Choose Date</label>
+                    <input
+                        required
+                        type="date"
+                        id="date"
+                        name="booking-date"
+                        min={new Date().toISOString().slice(0, 10)}
+                        // ref={date}
+                        value={date}
+                        //onFocus={resetField}
+                        onChange={checkDate}
+                        //onClick={dispatch({type:date})}
+                        
+                        onBlur={validateDate} />
+                        {/* {dispatch({type:date})} */}
+                    {
+                        dateError && (<p className="Error">Invalid Date, please choose a date after today!</p>)
+
+                    }
+                    {
+                        console.log(dateError)
+                    }
+                    {
+                        console.log(date)
+
+                    }
+                </div>
+                <div>
+                    <label htmlFor="time">Choose Time</label>
+
+                    <select
+                        disabled={dateError}
+                        id="time "
+                        name="booking-time"
+                        value={Time}
+                        onChange={selectedTime}
+                        required
+                    >
+                        <option
+                            disabled
+                            value="">
+                            -- : --
+                        </option>
+                        {/* {console.log(availableTimes)} */}
+                        {
+                            availableTimes.map((time, index) => (
+                                <option
+                                    key={index}
+                                    value={time}>
+                                    {time}
+                                </option>
+                            ))
+                        }
+
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="guest-number">Number of guest</label>
+                    <input
+                        type="number"
+                        id="guest-number"
+                        name="guest-number"
+                        placeholder="1"
+                        min={1}
+                        max={10}
+                        value={numberOfGuest}
+                        onChange={updateGuest}
+                        disabled={dateError}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="occasion">Occassion
+                        <select id="occasion" name="occasion" value="" ref={selectRef} disabled={dateError} >
+                            {<option
+                                disabled
+                                value="">
+                                -- : --
+                            </option>}
+                            <option value="Birthday">Birthday</option>
+                            <option value="Anniversary">Anniversary</option>
+                            <option value="Other">Other..</option>
+                        </select>
+                    </label>
+                </div>
+                {/* {console.log(`selectRef.current.value.length is ${selectRef.current.value.length}`)} */}
+                {
+                    date.length > 0 && Time.length > 0 && numberOfGuest > 0  ? disable = false : disable
+                }
+                <Link to="/reservation//reservation-2"><button
+                    type="submit"
+                    value="Make your reservation"
+                    disabled={disable || dateError}
+                >Reserve a Table</button></Link>
+            </form>
         </>
-    )
+    );
 }
 
-// import { useState } from "react";
-// export default function BookingPage(){
-//     const[chooseDate, setChooseDate]=useState("");
-//     const checkDate = (e)=>{
-//         setChooseDate(e.target.value);
-//     }
-//     return(
-//         <BookingForm 
-//         chooseDate={chooseDate}
-//         checkDate={checkDate}
-//         />
-//     )
-// }
