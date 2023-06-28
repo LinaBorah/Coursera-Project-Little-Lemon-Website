@@ -230,3 +230,12 @@ form{
   justify-content: center;
   margin-top: 80px;
 }
+.required-field::after {
+  content: "*";
+  color: white;
+}
+
+/* .required-field{
+  content: "*";
+  color: red;
+} */

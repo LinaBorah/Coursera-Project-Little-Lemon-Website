@@ -30,12 +30,11 @@ const updateTimes =(availableTimes, action)=>{
 function Main() {
     const [availableTimes, dispatch] = useReducer(updateTimes, timeList);
     const [date, setDate] = useState("");
-    //const date = useRef("");
     const [dateError, setDateError] = useState(false);
     const [numberOfGuest, setNumberOfGuest] = useState(0);
     const [Time, setTime] = useState("")
     const selectRef = useRef(null);
-    
+    const seatingRef = useRef(null);
     const checkDate=(e)=>{
         
         setDate(e.target.value);
@@ -76,13 +75,14 @@ function Main() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(selectRef.current.value.length===0){
-            
+
             <p>Select occassion</p>
         }
         setDate("");
         setTime("");
         setNumberOfGuest(0);
         selectRef.current.value = null;
+        seatingRef.current.value = null;
     }
     return (
         <main>
@@ -92,7 +92,6 @@ function Main() {
                 <Route path="/reservations" element={<BookingPage 
                     availableTimes={availableTimes}
                     date={date}
-
                     dateError={dateError}
                     numberOfGuest={numberOfGuest}
                     Time={Time}
@@ -102,9 +101,22 @@ function Main() {
                     validateDate={validateDate}
                     selectedTime={selectedTime}
                     updateGuest={updateGuest}
-                    handleSubmit={handleSubmit}
+                    
                     />} />
-                <Route path="/reservation//reservation-2" element={<AddDetailsForm />} />
+                <Route path="/reservations//reservation-2" element={<AddDetailsForm 
+                availableTimes={availableTimes}
+                date={date}
+                dateError={dateError}
+                numberOfGuest={numberOfGuest}
+                Time={Time}
+                dispatch={dispatch}
+                selectRef={selectRef}
+                checkDate={checkDate}
+                validateDate={validateDate}
+                selectedTime={selectedTime}
+                updateGuest={updateGuest}
+                handleSubmit={handleSubmit}
+                />} />
             </Routes>
         </main>
     );

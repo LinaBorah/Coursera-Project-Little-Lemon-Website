@@ -14,14 +14,20 @@ export default function BookingPage({
     validateDate,
     selectedTime,
     updateGuest,
-    handleSubmit
+    
 }) {
 
     var disable = true;
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form >
                 <div>
+                    <label htmlFor='seating'>
+                        <input type="radio" id="seating" name="seating" value="Indoor Seating" checked/>Indoor Seating
+                    </label>
+                    <label htmlFor='seating'>
+                        <input type="radio" id="seating" name="seating" value="Outdoor Seating"/>Outdoor Seating
+                    </label><br/>
                     <label htmlFor="date">Choose Date</label>
                     <input
                         required
@@ -95,9 +101,9 @@ export default function BookingPage({
                 </div>
                 <div>
                     <label htmlFor="occasion">Occassion
-                        <select id="occasion" name="occasion" value="" ref={selectRef} disabled={dateError} >
+                        <select id="occasion" name="occasion"  ref={selectRef} disabled={dateError} >
                             {<option
-                                disabled
+                                
                                 value="">
                                 -- : --
                             </option>}
@@ -111,7 +117,7 @@ export default function BookingPage({
                 {
                     date.length > 0 && Time.length > 0 && numberOfGuest > 0  ? disable = false : disable
                 }
-                <Link to="/reservation//reservation-2"><button
+                <Link to="/reservations//reservation-2"><button
                     type="submit"
                     value="Make your reservation"
                     disabled={disable || dateError}
