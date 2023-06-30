@@ -4,7 +4,7 @@ import BookingPage from './BookingPage';
 import About from './About';
 import { Route, Routes } from 'react-router-dom';
 import AddDetailsForm from './AddDetailsForm';
-import { useState, useRef, useReducer } from "react";
+import { useState, useReducer } from "react";
 
 const timeList = [
     '17:00',
@@ -14,108 +14,131 @@ const timeList = [
     '21:00',
     '22:00',
 ]
-const updateTimes =(availableTimes, action)=>{
-    availableTimes=action.availableTimes;
-    if(action.type==='2023-06-29') {
+const initializeTimes = () =>{
+    return 
+}
+const updateTimes = (availableTimes, action) => {
+    availableTimes = action.availableTimes;
+    if (action.type === '2023-06-29') {
         const copiedArray = availableTimes.slice(0);
         console.log(`Entered the condition ${availableTimes}`);
-        return copiedArray.filter((timevalue)=> timevalue !== '17:00');
-    }else{
+        return copiedArray.filter((timevalue) => timevalue !== '17:00');
+    } else {
         console.log(`did not enter ${availableTimes}`)
         return [...availableTimes];
     }
-    //return new Error();
-    
+
+
 }
 function Main() {
     const [availableTimes, dispatch] = useReducer(updateTimes, timeList);
     const [date, setDate] = useState("");
-    const [dateError, setDateError] = useState(false);
+    const [Error, setError] = useState(false);
     const [numberOfGuest, setNumberOfGuest] = useState(0);
     const [Time, setTime] = useState("")
-    const selectRef = useRef(null);
-    const seatingRef = useRef(null);
-    const checkDate=(e)=>{
-        
+    const [addDetails, setAddDetails] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phNumber: "",
+    });
+    const [occassion, setOccassion] = useState("");
+
+    const checkDate = (e) => {
+
         setDate(e.target.value);
         //availableTimes = timeList;
-        dispatch({type: e.target.value,
-        availableTimes: timeList})
-        setDateError(false);
+        dispatch({
+            type: e.target.value,
+            availableTimes: timeList
+        })
+        setError(false);
     }
-    
-    console.log(`availabletime  is ${typeof(availableTimes)}`);
-    console.log(availableTimes);
-    console.log(`date is ${date}`);
-    const validateDate=()=>{
-        
-        if(new Date(date)< new Date() || !new Date(date)){
-            setDateError(true);
-         }
-    }
-    
-    const selectedTime =(e)=>{
-        setTime(e.target.value);
-        
-    }
-    
-    // const isSelected =(availableTime)=>{
-    //     return availableTime !== Time;
-    // }
-    // const filteredTime = ()=>{
-       
-    //     setAvailableTimes(availableTimes.filter(isSelected));
-    // }
-    // console.log(availableTimes);
-    // console.log(Time);
 
-    const updateGuest = (e)=>{
+
+    const validateDate = () => {
+
+        if (new Date(date) < new Date() || !new Date(date)) {
+            setError(true);
+        }
+    }
+
+    const selectedTime = (e) => {
+        setTime(e.target.value);
+
+    }
+    const updateGuest = (e) => {
         setNumberOfGuest(e.target.value);
     }
+
+    //To update the addDetail state when user fills each field of the form
+    const updateForm = (e) => {
+        const { name, value } = e.target;
+        setAddDetails({
+            ...addDetails,
+            [name]: value,
+
+        })
+
+    }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(selectRef.current.value.length===0){
-
-            <p>Select occassion</p>
+        console.log(`adddetails is ${addDetails}`)
+        console.log(`adddetails values are ${addDetails.firstName}`)
+        if (addDetails.firstName === '' && addDetails.lastName === '' && addDetails.email === '' && addDetails.phNumber === '') {
+            setError(true)
         }
+        setError(false);
         setDate("");
         setTime("");
         setNumberOfGuest(0);
-        selectRef.current.value = null;
-        seatingRef.current.value = null;
+        setOccassion("")
+        setAddDetails({
+            ...addDetails,
+            firstName: "",
+            lastName: "",
+            email: "",
+            phNumber: "",
+        })
+
     }
     return (
         <main>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/reservations" element={<BookingPage 
+                <Route path="/reservations" element={<BookingPage
                     availableTimes={availableTimes}
                     date={date}
-                    dateError={dateError}
+                    Error={Error}
                     numberOfGuest={numberOfGuest}
                     Time={Time}
-                    dispatch={dispatch}
-                    selectRef={selectRef}
+                    occassion={occassion}
+                    setOccassion={setOccassion}
                     checkDate={checkDate}
                     validateDate={validateDate}
                     selectedTime={selectedTime}
                     updateGuest={updateGuest}
-                    
-                    />} />
-                <Route path="/reservations//reservation-2" element={<AddDetailsForm 
-                availableTimes={availableTimes}
-                date={date}
-                dateError={dateError}
-                numberOfGuest={numberOfGuest}
-                Time={Time}
-                dispatch={dispatch}
-                selectRef={selectRef}
-                checkDate={checkDate}
-                validateDate={validateDate}
-                selectedTime={selectedTime}
-                updateGuest={updateGuest}
-                handleSubmit={handleSubmit}
+
+                />} />
+                <Route path="/reservations//reservation-2" element={<AddDetailsForm
+                    availableTimes={availableTimes}
+                    date={date}
+                    Error={Error}
+                    numberOfGuest={numberOfGuest}
+                    Time={Time}
+                    dispatch={dispatch}
+                    occassion={occassion}
+                    setOccasion={setOccassion}
+
+                    checkDate={checkDate}
+                    validateDate={validateDate}
+                    selectedTime={selectedTime}
+                    updateGuest={updateGuest}
+                    updateForm={updateForm}
+                    addDetails={addDetails}
+                    handleSubmit={handleSubmit}
                 />} />
             </Routes>
         </main>

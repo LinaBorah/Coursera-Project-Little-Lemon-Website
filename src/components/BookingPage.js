@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 export default function BookingPage({
     availableTimes,
     date,
-    dateError,
+    Error,
     numberOfGuest,
     Time,
-    dispatch,
-    selectRef,
+    occassion,
+    setOccassion,
+    
     checkDate,
     validateDate,
     selectedTime,
@@ -23,12 +24,12 @@ export default function BookingPage({
             <form >
                 <div>
                     <label htmlFor='seating'>
-                        <input type="radio" id="seating" name="seating" value="Indoor Seating" checked/>Indoor Seating
+                        <input type="radio" id="seating" name="seating"  defaultChecked />Indoor Seating
                     </label>
                     <label htmlFor='seating'>
-                        <input type="radio" id="seating" name="seating" value="Outdoor Seating"/>Outdoor Seating
+                        <input type="radio" id="seating" name="seating" />Outdoor Seating
                     </label><br/>
-                    <label htmlFor="date">Choose Date</label>
+                    <label htmlFor="date" >Choose Date</label>
                     <input
                         required
                         type="date"
@@ -39,27 +40,20 @@ export default function BookingPage({
                         value={date}
                         //onFocus={resetField}
                         onChange={checkDate}
-                        //onClick={dispatch({type:date})}
-                        
                         onBlur={validateDate} />
-                        {/* {dispatch({type:date})} */}
+                       
+                        
                     {
-                        dateError && (<p className="Error">Invalid Date, please choose a date after today!</p>)
+                        Error && (<p role="alertdialog" className="Error">Invalid Date, please choose a date after today!</p>)
 
                     }
-                    {
-                        console.log(dateError)
-                    }
-                    {
-                        console.log(date)
-
-                    }
+                   
                 </div>
                 <div>
                     <label htmlFor="time">Choose Time</label>
 
                     <select
-                        disabled={dateError}
+                        disabled={Error}
                         id="time "
                         name="booking-time"
                         value={Time}
@@ -95,15 +89,17 @@ export default function BookingPage({
                         max={10}
                         value={numberOfGuest}
                         onChange={updateGuest}
-                        disabled={dateError}
+                        disabled={Error}
                         required
                     />
                 </div>
                 <div>
                     <label htmlFor="occasion">Occassion
-                        <select id="occasion" name="occasion"  ref={selectRef} disabled={dateError} >
+                        <select id="occasion" name="occasion"  value={occassion} onChange={(e)=>{
+                            setOccassion(e.target.value);
+                        }} disabled={Error} >
                             {<option
-                                
+                                disabled
                                 value="">
                                 -- : --
                             </option>}
@@ -115,12 +111,12 @@ export default function BookingPage({
                 </div>
                 {/* {console.log(`selectRef.current.value.length is ${selectRef.current.value.length}`)} */}
                 {
-                    date.length > 0 && Time.length > 0 && numberOfGuest > 0  ? disable = false : disable
+                    date.length > 0 && Time.length > 0 && numberOfGuest > 0 && occassion.length>0 ? disable = false : disable
                 }
                 <Link to="/reservations//reservation-2"><button
                     type="submit"
                     value="Make your reservation"
-                    disabled={disable || dateError}
+                    disabled={disable || Error}
                 >Reserve a Table</button></Link>
             </form>
         </>

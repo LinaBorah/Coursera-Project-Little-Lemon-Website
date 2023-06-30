@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 export default function AddDetailsForm({
     availableTimes,
     date,
-    dateError,
+    Error,
     numberOfGuest,
     Time,
     dispatch,
-    selectRef,
+    occassion,
+    setOccassion,
     checkDate,
     validateDate,
     selectedTime,
     updateGuest,
+    addDetails,
+    updateForm,
+    validateForm,
     handleSubmit,
 }){
     return (
@@ -19,24 +23,44 @@ export default function AddDetailsForm({
             <form onSubmit={handleSubmit}>
                 <label htmlFor="FirstName" className="required-field">First Name:</label>
                 <input 
+                required
                 type="text"
                 id="FirstName"
-                required/>
+                name="firstName"
+                value={addDetails.firstName}
+                onChange={updateForm}
+                
+                />
+                {console.log(`addDetails.firstName value is ${addDetails.firstName}`)}
+                {Error && <p>First Name required</p>}
                  <label htmlFor="LastName">Last Name:</label>
                 <input 
                 type="text"
                 id="LastName"
+                name="lastName"
+                value={addDetails.lastName}
+                onChange={updateForm}
+                
                 required/>
+                {Error && <p>Last Name required</p>}
                 <label>Email:</label>
                 <input 
                 type="email"
                 id="email"
+                name="email"
+                value={addDetails.email}
+                onChange={updateForm}
                 required/>
+                {Error && <p>Email required</p>}
                  <label htmlFor="PhNumber">Phone Number:</label>
                 <input 
                 type="number"
                 id="PhNumber"
+                name="phNumber"
+                value={addDetails.phNumber}
+                onChange={updateForm}
                 required/>
+                {Error && <p> Phone number required</p>}
                  <label htmlFor="Special-Request">Special Request:</label>
                 <textarea 
                 
@@ -46,24 +70,20 @@ export default function AddDetailsForm({
                 cols='20'
                 rows='5'
                 required/>
-                <p>
+                
                     <ul>
                         <li>selected date is: {date}</li>
                         <li>selected time is: {Time}</li>
                         <li>Number of Guest: {numberOfGuest}</li>
                         <li>
-                            Occassion: { selectRef.current.value.length===0?<Link to="/reservations"><p>Error!! occassion not selected</p></Link> : selectRef.current.value }
+                            Occassion: {occassion }
                             
                         </li>
-                        {/* {
-                        selectRef.current.value===0?
-                        <p>Error!! occassion not selected </p>:
-                        <li>Occassion: {selectRef.current.value}</li>
-                        } */}
+                        
 
                     </ul>
-                </p>
-                <button type='submit'>Confirm Reservation</button>
+                
+                <button type='submit' role="button" disabled={Error}>Confirm Reservation</button>
             </form>
         </>
     )
