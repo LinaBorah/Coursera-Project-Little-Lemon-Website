@@ -83,7 +83,7 @@ export default function AddDetailsForm({
 
                     </ul>
                 
-                <button type='submit' role="button" disabled={Error}>Confirm Reservation</button>
+                <button type='submit' disabled={Error}>Confirm Reservation</button>
             </form>
         </>
     )

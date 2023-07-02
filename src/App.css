@@ -221,15 +221,7 @@ footer{
   grid-template-columns: repeat(3, 200px);
   gap:6%
 }
-form{
-  display:grid;
-  grid-template-rows: auto auto auto auto;
-  background-color: #495E57;
-  color:white;
-  align-items: center;
-  justify-content: center;
-  margin-top: 80px;
-}
+
 .required-field::after {
   content: "*";
   color: white;
@@ -239,3 +231,44 @@ form{
   content: "*";
   color: red;
 } */
+.fields-group{
+  display: flex;
+  flex-direction: row;
+}
+.radio-button{
+  position: relative;
+  top:3px;
+  left:10px;
+  width:15px;
+  height:15px;
+  
+}
+.BookingPage {
+  background-color: #495E57;
+  display: flex;
+  flex-direction: column;
+  gap:10%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.seating{
+  
+  display: flex;
+  justify-content: space-between;
+  gap: 210px;
+  align-items: flex-start;
+}
+.datesection{
+  position:inherit;
+  background-color: pink;
+  display: flex;
+  justify-content: space-around;
+
+}
+.popup{
+  background-color: #F4CE14;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}

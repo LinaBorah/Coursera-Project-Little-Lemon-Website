@@ -10,110 +10,119 @@ export default function BookingPage({
     Time,
     occassion,
     setOccassion,
-    
     checkDate,
     validateDate,
     selectedTime,
     updateGuest,
-    
+
 }) {
 
     var disable = true;
     return (
         <>
-            <form >
-                <div>
+            <form className='BookingPage'>
+                <div className='seating'>
                     <label htmlFor='seating'>
-                        <input type="radio" id="seating" name="seating"  defaultChecked />Indoor Seating
+                        Indoor Seating <input className="radio-button" type="radio" id="seating" name="seating" defaultChecked />
                     </label>
+
                     <label htmlFor='seating'>
-                        <input type="radio" id="seating" name="seating" />Outdoor Seating
-                    </label><br/>
-                    <label htmlFor="date" >Choose Date</label>
-                    <input
-                        required
-                        type="date"
-                        id="date"
-                        name="booking-date"
-                        min={new Date().toISOString().slice(0, 10)}
-                        // ref={date}
-                        value={date}
-                        //onFocus={resetField}
-                        onChange={checkDate}
-                        onBlur={validateDate} />
-                       
-                        
-                    {
-                        Error && (<p role="alertdialog" className="Error">Invalid Date, please choose a date after today!</p>)
-
-                    }
-                   
+                        Outdoor Seating  <input className="radio-button" type="radio" id="seating" name="seating" />
+                    </label>
                 </div>
-                <div>
-                    <label htmlFor="time">Choose Time</label>
+                <div className='fields-group'>
+                    <div className='datesection'>
 
-                    <select
-                        disabled={Error}
-                        id="time "
-                        name="booking-time"
-                        value={Time}
-                        onChange={selectedTime}
-                        required
-                    >
-                        <option
-                            disabled
-                            value="">
-                            -- : --
-                        </option>
-                        {/* {console.log(availableTimes)} */}
+                        <label htmlFor="date" >Choose Date</label>
+                        <input
+                            required
+                            type="date"
+                            id="date"
+                            name="booking-date"
+                            min={new Date().toISOString().slice(0, 10)}
+                            // ref={date}
+                            value={date}
+                            //onFocus={resetField}
+                            onChange={checkDate}
+                            onBlur={validateDate} />
+
+
                         {
-                            availableTimes.map((time, index) => (
-                                <option
-                                    key={index}
-                                    value={time}>
-                                    {time}
-                                </option>
-                            ))
+                            Error && (<p role="alertdialog" className="Error">Invalid Date, please choose a date after today!</p>)
+
                         }
 
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="guest-number">Number of guest</label>
-                    <input
-                        type="number"
-                        id="guest-number"
-                        name="guest-number"
-                        placeholder="1"
-                        min={1}
-                        max={10}
-                        value={numberOfGuest}
-                        onChange={updateGuest}
-                        disabled={Error}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="occasion">Occassion
-                        <select id="occasion" name="occasion"  value={occassion} onChange={(e)=>{
-                            setOccassion(e.target.value);
-                        }} disabled={Error} >
-                            {<option
+                    </div>
+
+                    <div className='timsection'>
+                        <label htmlFor="time">Choose Time</label>
+
+                        <select
+                            disabled={Error}
+                            id="time "
+                            name="booking-time"
+                            value={Time}
+                            onChange={selectedTime}
+                            required
+                        >
+                            <option
                                 disabled
                                 value="">
                                 -- : --
-                            </option>}
-                            <option value="Birthday">Birthday</option>
-                            <option value="Anniversary">Anniversary</option>
-                            <option value="Other">Other..</option>
+                            </option>
+                            {/* {console.log(availableTimes)} */}
+                            {
+                                availableTimes.map((time, index) => (
+                                    <option
+                                        key={index}
+                                        value={time}>
+                                        {time}
+                                    </option>
+                                ))
+                            }
+
                         </select>
-                    </label>
+                    </div>
                 </div>
+                <div className='fields-group'>
+                    <div className='guestsection'>
+                        <label htmlFor="guest-number">Number of guest</label>
+                        <input
+                            type="number"
+                            id="guest-number"
+                            name="guest-number"
+                            placeholder="1"
+                            min={1}
+                            max={10}
+                            value={numberOfGuest}
+                            onChange={updateGuest}
+                            disabled={Error}
+                            required
+                        />
+                    </div>
+                    <div className='occassion'>
+                        <label htmlFor="occasion">Occassion
+                            <select id="occasion" name="occasion" value={occassion} onChange={(e) => {
+                                setOccassion(e.target.value);
+                            }} disabled={Error} >
+                                {<option
+                                    disabled
+                                    value="">
+                                    -- : --
+                                </option>}
+                                <option value="Birthday">Birthday</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Other">Other..</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
                 {/* {console.log(`selectRef.current.value.length is ${selectRef.current.value.length}`)} */}
                 {
-                    date.length > 0 && Time.length > 0 && numberOfGuest > 0 && occassion.length>0 ? disable = false : disable
+                    date.length > 0 && Time.length > 0 && numberOfGuest > 0 && occassion.length > 0 ? disable = false : disable
                 }
-                <Link to="/reservations//reservation-2"><button
+                <Link to="/reservations//reservation-2"><button className='ReserveTable'
                     type="submit"
                     value="Make your reservation"
                     disabled={disable || Error}

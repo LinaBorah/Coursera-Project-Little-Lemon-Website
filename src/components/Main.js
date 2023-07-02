@@ -5,6 +5,8 @@ import About from './About';
 import { Route, Routes } from 'react-router-dom';
 import AddDetailsForm from './AddDetailsForm';
 import { useState, useReducer } from "react";
+import Confirmation from './Confirmation';
+//import {fetchAPI, submitAPI} from "https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js";
 
 const timeList = [
     '17:00',
@@ -14,9 +16,7 @@ const timeList = [
     '21:00',
     '22:00',
 ]
-const initializeTimes = () =>{
-    return 
-}
+
 const updateTimes = (availableTimes, action) => {
     availableTimes = action.availableTimes;
     if (action.type === '2023-06-29') {
@@ -43,7 +43,8 @@ function Main() {
         phNumber: "",
     });
     const [occassion, setOccassion] = useState("");
-
+    const[confirmpopup, setConfirmpopup] = useState(false);
+    
     const checkDate = (e) => {
 
         setDate(e.target.value);
@@ -81,11 +82,11 @@ function Main() {
         })
 
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`adddetails is ${addDetails}`)
-        console.log(`adddetails values are ${addDetails.firstName}`)
+        setConfirmpopup(true);
+        
         if (addDetails.firstName === '' && addDetails.lastName === '' && addDetails.email === '' && addDetails.phNumber === '') {
             setError(true)
         }
@@ -105,6 +106,7 @@ function Main() {
     }
     return (
         <main>
+            <Confirmation trigger={confirmpopup} setTrigger={setConfirmpopup}/>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
@@ -140,7 +142,9 @@ function Main() {
                     addDetails={addDetails}
                     handleSubmit={handleSubmit}
                 />} />
+                
             </Routes>
+            
         </main>
     );
 }
