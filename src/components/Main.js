@@ -1,13 +1,11 @@
 
-import Home from './Home';
-import BookingPage from './BookingPage';
-import About from './About';
+import Home from './Home/Home';
+import BookingPage from '../components/BookingPage/BookingPage.js';
+import About from './About/About';
 import { Route, Routes } from 'react-router-dom';
-import AddDetailsForm from './AddDetailsForm';
+import AddDetailsForm from './AddDetailsForm/AddDetailsForm';
 import { useState, useReducer } from "react";
-import Confirmation from './Confirmation';
-//import {fetchAPI, submitAPI} from "https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js";
-
+//static time variable to show the list of times available for booking
 const timeList = [
     '17:00',
     '18:00',
@@ -15,36 +13,37 @@ const timeList = [
     '20:00',
     '21:00',
     '22:00',
-]
-
+] 
+// reducer function to change available times based on selected date.
 const updateTimes = (availableTimes, action) => {
     availableTimes = action.availableTimes;
+    /*currently this function is 
+    not updating available times via live data, which I will change later using API, for now I have made 
+    it static by choosing a random date on which it will show a different time list for available time array.
+    */
     if (action.type === '2023-06-29') {
         const copiedArray = availableTimes.slice(0);
-        console.log(`Entered the condition ${availableTimes}`);
         return copiedArray.filter((timevalue) => timevalue !== '17:00');
     } else {
-        console.log(`did not enter ${availableTimes}`)
         return [...availableTimes];
     }
-
-
 }
+// Main Component to route to selected page.
 function Main() {
-    const [availableTimes, dispatch] = useReducer(updateTimes, timeList);
-    const [date, setDate] = useState("");
-    const [Error, setError] = useState(false);
-    const [numberOfGuest, setNumberOfGuest] = useState(0);
-    const [Time, setTime] = useState("")
+    const [availableTimes, dispatch] = useReducer(updateTimes, timeList); // for controlled form component reducer state to change available times based on dispatched date.
+    const [date, setDate] = useState(""); // for date input
+    const [Error, setError] = useState(false); //for finding error on validation
+    const [numberOfGuest, setNumberOfGuest] = useState(0); //for guest selection
+    const [Time, setTime] = useState("")// for time selection
     const [addDetails, setAddDetails] = useState({
         firstName: "",
         lastName: "",
         email: "",
         phNumber: "",
-    });
-    const [occassion, setOccassion] = useState("");
-    const[confirmpopup, setConfirmpopup] = useState(false);
-    
+    }); // for additional details on the form
+    const [occassion, setOccassion] = useState(""); // for occassion selection
+
+    // function to change date on selection
     const checkDate = (e) => {
 
         setDate(e.target.value);
@@ -56,7 +55,7 @@ function Main() {
         setError(false);
     }
 
-
+    // function to validate date so that user don't select current date.
     const validateDate = () => {
 
         if (new Date(date) < new Date() || !new Date(date)) {
@@ -82,10 +81,10 @@ function Main() {
         })
 
     }
-
+    //function to handle all the states when user subits the form
     const handleSubmit = (e) => {
         e.preventDefault();
-        setConfirmpopup(true);
+        
         
         if (addDetails.firstName === '' && addDetails.lastName === '' && addDetails.email === '' && addDetails.phNumber === '') {
             setError(true)
@@ -106,7 +105,7 @@ function Main() {
     }
     return (
         <main>
-            <Confirmation trigger={confirmpopup} setTrigger={setConfirmpopup}/>
+            
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

@@ -1,13 +1,10 @@
-## Things left to do:
+Title: Little Lemon Website
+Feature: Booking a Table in the website
 
-Design :
-1. Add style to navigation buttons to highlight which page the user is on
-2. Add page icon
-3. Done-added date validation
-4. Done - add other validation
-    1. filter out selected time
-5. Add resetting of values on page reload
-6. Add error relevant style
-7. on submit validate
-8. on reload reset the values
-9. add : hovering on disabled button will show a message
+How to run: Clone it on your desktop, run npm install in the command line to install the node modules, and then npm start to actually see the website.
+
+This website is an SPA(single page application) built in react.
+This is a prototype of booking a table in a restaurant website. It includes a working home page, a reservation page, about page and header and footer.
+I tried to semantically arrange the website.
+Basically there is a button on the homepage, by clicking which user gets directed to a form to fill the details of the booking and then can confirm the booking.
+Main component is the main page from where I have routed other pages. In this component I have handled the states.

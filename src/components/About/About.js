@@ -1,8 +1,9 @@
-import about1 from '../assets/Mario and Adrian A.jpg';
-import about2 from '../assets/Mario and Adrian b.jpg';
+import about1 from '../../assets/Mario and Adrian A.jpg';
+import about2 from '../../assets/Mario and Adrian b.jpg';
+import './About.css';
 export default function About(){
     return(
-        <section className="About">
+        <section className="About2">
             <div>
                     <h1>Little Lemon</h1>
                     <h2>Chicago</h2>

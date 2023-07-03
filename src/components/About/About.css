@@ -1,0 +1,22 @@
+.About2{
+    min-height: 90vh;
+    background-color: #495E57;
+    margin-top: 50px;
+    display:grid;
+    grid-template-columns: 100vh auto;
+    justify-content: center;
+    align-items: center;
+}
+.About2>div>p{
+    padding-right: 20%;
+    padding-top: 3%;
+    color: white;
+  }
+  .About2>div>h1,.About2>div>h2{
+    color: yellow;
+  
+  }
+  .About2>div:nth-child(2)>img{
+    border-radius: 16px;
+    height: 400px;
+  }
