@@ -1,5 +1,5 @@
-Title: Little Lemon Website
-Feature: Booking a Table in the website
+### Title: Little Lemon Website
+### Feature: Booking a Table in the website
 
 How to run: Clone it on your desktop, run npm install in the command line to install the node modules, and then npm start to actually see the website.
 
