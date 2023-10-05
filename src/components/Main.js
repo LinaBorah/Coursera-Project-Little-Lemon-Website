@@ -81,14 +81,9 @@ function Main() {
         })
 
     }
-    //function to handle all the states when user subits the form
+    //function to handle all the states when user submits the form
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        
-        if (addDetails.firstName === '' && addDetails.lastName === '' && addDetails.email === '' && addDetails.phNumber === '') {
-            setError(true)
-        }
         setError(false);
         setDate("");
         setTime("");
@@ -127,6 +122,7 @@ function Main() {
                     availableTimes={availableTimes}
                     date={date}
                     Error={Error}
+                    setError={setError}
                     numberOfGuest={numberOfGuest}
                     Time={Time}
                     dispatch={dispatch}

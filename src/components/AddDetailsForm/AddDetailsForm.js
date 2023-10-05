@@ -6,6 +6,7 @@ export default function AddDetailsForm({
     availableTimes,
     date,
     Error,
+    setError,
     numberOfGuest,
     Time,
     occassion,
@@ -92,7 +93,9 @@ export default function AddDetailsForm({
                     </div>
 
                 </div>
-
+                
+                {(addDetails.firstName === '' || addDetails.lastName === '' || addDetails.email === '' || addDetails.phNumber === '')?setError(true) : setError(false)}
+                {console.log(Error)}
                 
                 <button type='submit' disabled={Error} onClick={()=>setConfirmpopup(true)}>Confirm Reservation</button>
                 
