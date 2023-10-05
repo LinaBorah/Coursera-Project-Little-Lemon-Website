@@ -13,7 +13,7 @@ const timeList = [
     '20:00',
     '21:00',
     '22:00',
-] 
+]
 // reducer function to change available times based on selected date.
 const updateTimes = (availableTimes, action) => {
     availableTimes = action.availableTimes;
@@ -83,6 +83,7 @@ function Main() {
     }
     //function to handle all the states when user submits the form
     const handleSubmit = (e) => {
+        console.log('initiated handlesubmit')
         e.preventDefault();
         setError(false);
         setDate("");
@@ -100,7 +101,7 @@ function Main() {
     }
     return (
         <main>
-            
+
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
@@ -116,10 +117,8 @@ function Main() {
                     validateDate={validateDate}
                     selectedTime={selectedTime}
                     updateGuest={updateGuest}
-
                 />} />
                 <Route path="/reservations//reservation-2" element={<AddDetailsForm
-                    availableTimes={availableTimes}
                     date={date}
                     Error={Error}
                     setError={setError}
@@ -128,18 +127,22 @@ function Main() {
                     dispatch={dispatch}
                     occassion={occassion}
                     setOccasion={setOccassion}
-
                     checkDate={checkDate}
                     validateDate={validateDate}
                     selectedTime={selectedTime}
                     updateGuest={updateGuest}
                     updateForm={updateForm}
                     addDetails={addDetails}
+                    setAddDetails
+                    setNumberOfGuest
+                    setOccassion
+                    setDate
+                    setTime
                     handleSubmit={handleSubmit}
                 />} />
-                
+
             </Routes>
-            
+
         </main>
     );
 }

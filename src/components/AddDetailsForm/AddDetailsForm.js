@@ -3,7 +3,7 @@ import './AddDetailsForm.css';
 import Confirmation from '../Confirmation';
 import { useState } from 'react';
 export default function AddDetailsForm({
-    availableTimes,
+    
     date,
     Error,
     setError,
@@ -12,14 +12,15 @@ export default function AddDetailsForm({
     occassion,
     addDetails,
     updateForm,
-    handleSubmit,
+    handleSubmit
 }) {
-    const[confirmpopup, setConfirmpopup] = useState(false);
+    const [confirmpopup, setConfirmpopup] = useState(false);
+    var isEmpty = true;
     return (
         <>
-            
-            <form onSubmit={handleSubmit} className="AddDetails">
-            <Confirmation trigger={confirmpopup} setTrigger={setConfirmpopup}/>
+
+            <form className="AddDetails" onSubmit={handleSubmit}>
+                <Confirmation trigger={confirmpopup} setTrigger={setConfirmpopup} />
                 <div className='Input-group'>
                     <div className='left-section'>
                         <div className='Fname'>
@@ -78,7 +79,7 @@ export default function AddDetailsForm({
                                 max='50'
                                 cols='20'
                                 rows='5'
-                                
+
                             />
                         </div>
                         <div className='list'>
@@ -93,12 +94,12 @@ export default function AddDetailsForm({
                     </div>
 
                 </div>
-                
-                {(addDetails.firstName === '' || addDetails.lastName === '' || addDetails.email === '' || addDetails.phNumber === '')?setError(true) : setError(false)}
-                {console.log(Error)}
-                
-                <button type='submit' disabled={Error} onClick={()=>setConfirmpopup(true)}>Confirm Reservation</button>
-                
+
+                {(addDetails.firstName === '' || addDetails.lastName === '' || addDetails.email === '' || addDetails.phNumber === '') ? isEmpty : isEmpty=false}
+
+
+                <button type='submit' disabled={isEmpty}  onClick={() => setConfirmpopup(true)} >Confirm Reservation</button>
+
             </form>
         </>
     )

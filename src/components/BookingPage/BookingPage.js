@@ -19,7 +19,7 @@ export default function BookingPage({
     var disable = true;
     return (
         <>
-
+            {console.log(`error value is ${Error}`)}
             <form className='BookingPage'>
                 <h2>Please enter your reservation details</h2>
                 <div className='Inputgroup'>
@@ -127,7 +127,7 @@ export default function BookingPage({
                     date.length > 0 && Time.length > 0 && numberOfGuest > 0 && occassion.length > 0 ? disable = false : disable
                 }
                 <Link to="/reservations//reservation-2"><button className='ReserveTable'
-                    type="submit"
+                    
                     value="Make your reservation"
                     disabled={disable || Error}
                 >Reserve Table</button></Link>
